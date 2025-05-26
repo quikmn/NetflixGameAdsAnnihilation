@@ -4,6 +4,7 @@
 Author: [quikmn](https://github.com/quikmn)
 
 A Chrome extension that eradicates Netflix's intrusive mobile game banners, autoplaying hero content, and promotional billboards.
+Tested on Brave and Chrome. Personally i don't use Chrome anymore because of reasons. Live and let live!
 
 ---
 
