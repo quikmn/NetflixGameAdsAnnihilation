@@ -1,0 +1,5 @@
+_metadata/
+*.log
+*.zip
+.DS_Store
+Thumbs.db
