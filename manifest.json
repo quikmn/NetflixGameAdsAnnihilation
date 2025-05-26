@@ -1,0 +1,42 @@
+{
+    "manifest_version": 3,
+    "name": "NetflixGameAdsAnnihilation",
+    "version": "1.0",
+    "description": "Eradicates Netflix's intrusive mobile game ads and banners. Created by https://github.com/quikmn/NetflixGameAdsAnnihilation.",
+    "author": "https://github.com/quikmn/NetflixGameAdsAnnihilation",
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+      }
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": [
+      "declarativeNetRequest",
+      "declarativeNetRequestWithHostAccess",
+      "storage"
+    ],
+    "host_permissions": [
+      "*://www.netflix.com/*",
+      "*://*.nflxso.net/*"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["*://www.netflix.com/*"],
+        "js": ["content.js"],
+        "run_at": "document_idle"
+      }
+    ],
+    "declarative_net_request": {
+      "rule_resources": [{
+        "id": "block_rules",
+        "enabled": true,
+        "path": "rules.json"
+      }]
+    }
+  }
+  
