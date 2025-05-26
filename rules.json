@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0",
+      "resourceTypes": ["image"]
+    }
+  }
+]
