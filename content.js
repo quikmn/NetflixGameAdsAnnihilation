@@ -1,5 +1,5 @@
-chrome.storage.local.get(["enabled", "maxClean"], (data) => {
-  if (!data.enabled) return;
+function applyFiltering(enabled) {
+  if (!enabled) return;
 
   const selectorsToRemove = [
     ".ltr-fhxb3m",
@@ -7,27 +7,29 @@ chrome.storage.local.get(["enabled", "maxClean"], (data) => {
     ".ltr-1q3zhvu.billboard-game-metadata",
     ".hero-image-wrapper",
     ".mobile-billboard.billboard-originals.billboard-pane.billboard",
-    ".billboard-row-games.billboard-row"
+    ".billboard-row-games.billboard-row",
+    ".billboard-row" // Always remove ALL billboard rows
   ];
 
-  // Add full nuking if Max Clean is enabled
-  if (data.maxClean) {
-    selectorsToRemove.push(".billboard-row");
-  } else {
-    selectorsToRemove.push(".billboard-row.billboard-row--hero");
-  }
-
-  function removeElements() {
+  const removeElements = () => {
     selectorsToRemove.forEach(selector => {
       document.querySelectorAll(selector).forEach(el => el.remove());
     });
-  }
+  };
 
   removeElements();
-
   const observer = new MutationObserver(removeElements);
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+chrome.storage.local.get("enabled", ({ enabled = true }) => {
+  applyFiltering(enabled);
+});
+
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.type === "FILTER_TOGGLE") {
+    chrome.storage.local.get("enabled", ({ enabled }) => {
+      applyFiltering(enabled);
+    });
+  }
 });
