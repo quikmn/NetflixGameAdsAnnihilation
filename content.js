@@ -10,13 +10,19 @@ chrome.storage.local.get("enabled", (data) => {
     ".billboard-row-games.billboard-row"
   ];
 
-  function removeElements(selectors) {
-    selectors.forEach(selector => {
+  function removeElements() {
+    selectorsToRemove.forEach(selector => {
       document.querySelectorAll(selector).forEach(el => el.remove());
     });
   }
 
-  removeElements(selectorsToRemove);
-  const observer = new MutationObserver(() => removeElements(selectorsToRemove));
-  observer.observe(document.body, { childList: true, subtree: true });
+  // Run once on load
+  removeElements();
+
+  // Observe future DOM mutations
+  const observer = new MutationObserver(removeElements);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
 });
