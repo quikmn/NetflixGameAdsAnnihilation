@@ -1,4 +1,4 @@
-chrome.storage.local.get("enabled", (data) => {
+chrome.storage.local.get(["enabled", "maxClean"], (data) => {
   if (!data.enabled) return;
 
   const selectorsToRemove = [
@@ -10,16 +10,21 @@ chrome.storage.local.get("enabled", (data) => {
     ".billboard-row-games.billboard-row"
   ];
 
+  // Add full nuking if Max Clean is enabled
+  if (data.maxClean) {
+    selectorsToRemove.push(".billboard-row");
+  } else {
+    selectorsToRemove.push(".billboard-row.billboard-row--hero");
+  }
+
   function removeElements() {
     selectorsToRemove.forEach(selector => {
       document.querySelectorAll(selector).forEach(el => el.remove());
     });
   }
 
-  // Run once on load
   removeElements();
 
-  // Observe future DOM mutations
   const observer = new MutationObserver(removeElements);
   observer.observe(document.body, {
     childList: true,
