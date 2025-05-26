@@ -12,7 +12,6 @@ Tested on Brave and Chrome. Personally I don't use Chrome anymore because of rea
 
 - 🛑 Removes mobile game promotions and banners from the Netflix homepage
 - 🎥 Hides the large autoplaying hero banner
-- 🧼 Includes an optional **Max Clean Mode** to remove all billboard rows (not just the top one)
 - ✅ Toggleable: turn filtering on/off anytime via the extension popup
 
 ---
@@ -46,7 +45,6 @@ C:\Users\yourname\NetflixGameAdsAnnihilation
 Click the extension icon in the Chrome toolbar to open the popup.
 
 - **Enable Filtering** – Turns ad and banner removal on or off
-- **Max Clean Mode** – If enabled, removes all `.billboard-row` elements (not just the hero)
 
 Changes take effect instantly on Netflix once toggled and the page is refreshed.
 
